@@ -1,3 +1,7 @@
+<div align="center">
+  <img src=https://github.com/jeffreyspaan/coolname/blob/master/header.png?raw=true">
+</div>
+
 # \<CoolName\>: a dataflow simulator.
 
 Abstract from thesis:
