@@ -1,0 +1,70 @@
+digraph IR {
+subgraph cluster_1 {
+	B1_OT1 [label=1, shape=doublecircle];
+	B1_OT2 [label="T", shape=doublecircle];
+
+	B1_CC1 [label=2, shape=circle];
+
+	B1_ML1 [label="B", shape=invtriangle, type=int];
+
+	B1_COMB1 [label="COMBINE", shape=house];
+
+	B1_COMP1 [label="==", operator=EQ, shape=box, type=int];
+	B1_COMP2 [label="!", operator=NOT, shape=box, type=bool];
+
+	B1_COMB2 [label="COMBINE", shape=house];
+	B1_COMB3 [label="COMBINE", shape=house];
+}
+
+subgraph cluster_2 {
+	B2_CC1 [label=3, shape=circle];
+	B2_CC2 [label="T", shape=circle];
+
+	B2_COMP1 [label="+", operator=ADD, shape=box, type=int];
+	B2_MS1 [label="B", shape=triangle];
+}
+
+subgraph cluster_3 {
+	B3_CC1 [label=3, shape=circle];
+	B3_CC2 [label="T", shape=circle];
+
+	B3_COMP1 [label="*", operator=MUL, shape=box, type=int];
+	B3_MS1 [label="B", shape=triangle];
+}
+
+# B1 wires
+B1_CC1 -> B1_COMP1 [label="RHS"];
+B1_ML1 -> B1_COMP1 [label="LHS"];
+
+B1_COMP1 -> B1_COMP2;
+B1_COMP1 -> B1_COMB2 [style=dotted];
+
+B1_ML1 -> B1_COMB1 [style=dotted];
+
+B1_COMB1 -> B1_COMB2;
+B1_COMB1 -> B1_COMB3;
+
+B1_COMP2 -> B1_COMB3 [style=dotted];
+
+B1_OT2 -> B1_COMP1 [style=dotted];
+B1_OT2 -> B1_COMP2 [style=dotted];
+B1_OT2 -> B1_ML1 [style=dotted];
+B1_OT2 -> B1_COMB1 [style=dotted];
+
+B1_OT1 -> B2_COMP1 [label="LHS"];
+B1_OT1 -> B3_COMP1 [label="LHS"];
+
+// B2 wires
+B2_CC2 -> B2_COMP1 [style=dotted];
+B2_CC1 -> B2_COMP1 [label="RHS"];
+B2_COMP1 -> B2_MS1;
+
+// B3 wires
+B3_CC2 -> B3_COMP1 [style=dotted];
+B3_CC1 -> B3_COMP1 [label="RHS"];
+B3_COMP1 -> B3_MS1;
+
+// Global wires
+B1_COMB2 -> B2_MS1 [style=dotted];
+B1_COMB3 -> B3_MS1 [style=dotted];
+}

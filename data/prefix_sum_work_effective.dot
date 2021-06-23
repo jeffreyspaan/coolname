@@ -1,0 +1,109 @@
+digraph IR {
+graph [bgcolor=transparent, ratio="0.5545"];
+node [color="#aaccf4", fillcolor="#1d2f49", fontcolor=white, style=filled];
+edge [color=white, fontcolor=white];
+PRED [label="T", shape=doublecircle];
+subgraph cluster_2 {
+color="#aaccf4";
+penwidth=2;
+R0_0 [label=7, shape=doublecircle];
+R0_1 [label=0, shape=doublecircle];
+R0_2 [label=2, shape=doublecircle];
+R0_3 [label=9, shape=doublecircle];
+R0_4 [label=5, shape=doublecircle];
+R0_5 [label=1, shape=doublecircle];
+R0_6 [label=8, shape=doublecircle];
+R0_7 [label=6, shape=doublecircle];
+}
+
+subgraph cluster_3 {
+color="#aaccf4";
+penwidth=2;
+R1_1 [label="+", operator=ADD, shape=box, type=int];
+R1_3 [label="+", operator=ADD, shape=box, type=int];
+R1_5 [label="+", operator=ADD, shape=box, type=int];
+R1_7 [label="+", operator=ADD, shape=box, type=int];
+}
+
+subgraph cluster_4 {
+color="#aaccf4";
+penwidth=2;
+R2_3 [label="+", operator=ADD, shape=box, type=int];
+R2_7 [label="+", operator=ADD, shape=box, type=int];
+}
+
+subgraph cluster_5 {
+color="#aaccf4";
+penwidth=2;
+R3_7 [label="+", operator=ADD, shape=box, type=int];
+}
+
+subgraph cluster_6 {
+color="#aaccf4";
+penwidth=2;
+R4_5 [label="+", operator=ADD, shape=box, type=int];
+}
+
+subgraph cluster_7 {
+color="#aaccf4";
+penwidth=2;
+R5_2 [label="+", operator=ADD, shape=box, type=int];
+R5_4 [label="+", operator=ADD, shape=box, type=int];
+R5_6 [label="+", operator=ADD, shape=box, type=int];
+}
+
+subgraph cluster_8 {
+color="#aaccf4";
+penwidth=2;
+R6_0 [label="R6_0", shape=star];
+R6_1 [label="R6_1", shape=star];
+R6_2 [label="R6_2", shape=star];
+R6_3 [label="R6_3", shape=star];
+R6_4 [label="R6_4", shape=star];
+R6_5 [label="R6_5", shape=star];
+R6_6 [label="R6_6", shape=star];
+R6_7 [label="R6_7", shape=star];
+}
+
+R0_0 -> R1_1  [label="LHS"];
+R0_1 -> R1_1  [label="RHS"];
+R0_2 -> R1_3  [label="LHS"];
+R0_3 -> R1_3  [label="RHS"];
+R0_4 -> R1_5  [label="LHS"];
+R0_5 -> R1_5  [label="RHS"];
+R0_6 -> R1_7  [label="LHS"];
+R0_7 -> R1_7  [label="RHS"];
+R1_1 -> R2_3  [label="LHS"];
+R1_3 -> R2_3  [label="RHS"];
+R1_5 -> R2_7  [label="LHS"];
+R1_7 -> R2_7  [label="RHS"];
+R2_3 -> R3_7  [label="LHS"];
+R2_7 -> R3_7  [label="RHS"];
+R2_3 -> R4_5  [label="LHS"];
+R1_5 -> R4_5  [label="RHS"];
+R1_1 -> R5_2  [label="LHS"];
+R0_2 -> R5_2  [label="RHS"];
+R2_3 -> R5_4  [label="LHS"];
+R0_4 -> R5_4  [label="RHS"];
+R4_5 -> R5_6  [label="LHS"];
+R0_6 -> R5_6  [label="RHS"];
+R0_0 -> R6_0;
+R1_1 -> R6_1;
+R5_2 -> R6_2;
+R2_3 -> R6_3;
+R5_4 -> R6_4;
+R4_5 -> R6_5;
+R5_6 -> R6_6;
+R3_7 -> R6_7;
+PRED -> R1_1  [style=dotted];
+PRED -> R1_3  [style=dotted];
+PRED -> R1_5  [style=dotted];
+PRED -> R1_7  [style=dotted];
+PRED -> R2_3  [style=dotted];
+PRED -> R2_7  [style=dotted];
+PRED -> R3_7  [style=dotted];
+PRED -> R4_5  [style=dotted];
+PRED -> R5_2  [style=dotted];
+PRED -> R5_4  [style=dotted];
+PRED -> R5_6  [style=dotted];
+}

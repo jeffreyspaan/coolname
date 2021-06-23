@@ -1,0 +1,13 @@
+#!/bin/bash
+
+source=$1
+source_path=$2
+kernel_name=${source%.*}
+source_flat=${kernel_name}_flattened.c
+
+flatten $source
+clang -emit-llvm -Xclang -disable-O0-optnone -I ../../jupyter_container/polybench-c-4.2.1-beta/utilities/ -I $source_path  $source_flat -c -o ${kernel_name}_flattened.bc
+llvm-extract -func kernel_${kernel_name} ${kernel_name}_flattened.bc > ${kernel_name}_flattened_kernel.bc
+llvm-dis ${kernel_name}_flattened_kernel.bc > ${kernel_name}_flattened_kernel.ll
+opt -load /scratch0/g00593823/llvm-project/llvm/build/lib/LLVMDDG.so -DDG ${kernel_name}_flattened_kernel.bc > /dev/null
+mv DDG.dot ${kernel_name}_DDG.dot

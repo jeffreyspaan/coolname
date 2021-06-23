@@ -1,0 +1,194 @@
+digraph IR {
+graph [bgcolor=transparent, ratio="0.5545"];
+node [color="#aaccf4", fillcolor="#1d2f49", fontcolor=white, style=filled];
+edge [color=white, fontcolor=white];
+E_OC1 [label="T", shape=doublecircle];
+subgraph cluster_2 {
+color="#aaccf4";
+penwidth=2;
+E_OC2 [label=1, shape=doublecircle];
+E_OC3 [label=0, shape=doublecircle];
+E_OC4 [label=0, shape=doublecircle];
+E_COMP1 [label="+", operator=ADD, shape=box];
+}
+
+subgraph cluster_3 {
+color="#aaccf4";
+penwidth=2;
+FB_ML1 [label="n", shape=invtriangle, type=int];
+FB_COMB1 [label="COMBINE", shape=house];
+FB_COMP1 [label="\<", operator=LT, shape=box, type=int];
+FB_COMP2 [label="!", operator=NOT, shape=box, type=bool];
+FB_ETA1 [label="ETA", shape=parallelogram];
+FB_ETA2 [label="ETA", shape=parallelogram];
+}
+
+subgraph cluster_4 {
+color="#aaccf4";
+penwidth=2;
+IE36_CC1 [label=1, shape=circle];
+IE36_CC2 [label=1, shape=circle];
+IE36_CC3 [label=0, shape=circle];
+IE36_COMP1 [label="+", operator=ADD, shape=box, type=int];
+IE36_COMP2 [label="+", operator=ADD, shape=box, type=int];
+IE36_ETA1 [label="ETA", shape=parallelogram];
+}
+
+subgraph cluster_5 {
+color="#aaccf4";
+penwidth=2;
+IT_ML1 [label="m", shape=invtriangle, type=int];
+IT_COMB1 [label="COMBINE", shape=house];
+IT_COMP1 [label="\<", operator=LT, shape=box, type=int];
+IT_COMP2 [label="!", operator=NOT, shape=box, type=int];
+IT_ETA1 [label="ETA", shape=parallelogram];
+IT_ETA2 [label="ETA", shape=parallelogram];
+}
+
+subgraph cluster_6 {
+color="#aaccf4";
+penwidth=2;
+IT12_CC1 [label=1, shape=circle];
+IT12_COMP1 [label="+", operator=ADD, shape=box, type=int];
+IT12_COMP2 [label="*", operator=MUL, shape=box, type=int];
+IT12_COMP3 [label="+", operator=ADD, shape=box, type=int];
+IT12_ETA1 [label="ETA", shape=parallelogram];
+IT12_ETA2 [label="ETA", shape=parallelogram];
+IT12_ML1 [label="A", shape=invtriangle, type=int];
+IT12_ML2 [label="B", shape=invtriangle, type=int];
+IT12_ML3 [label="B", shape=invtriangle, type=int];
+IT12_MS1 [label="B", shape=triangle];
+IT12_COMB1 [label="COMBINE", shape=house];
+}
+
+subgraph cluster_7 {
+color="#aaccf4";
+penwidth=2;
+IE_CC1 [label=1, shape=circle];
+IE_CC2 [label=1, shape=circle];
+IE_ML1 [label="alpha", shape=invtriangle, type=int];
+IE_ML2 [label="B", shape=invtriangle, type=int];
+IE_ETA1 [label="ETA", shape=parallelogram];
+IE_COMP1 [label="+", operator=ADD, shape=box, type=int];
+IE_COMP2 [label="+", operator=ADD, shape=box, type=int];
+IE_COMP3 [label="*", operator=MUL, shape=box, type=int];
+IE_MS1 [label="B", shape=triangle];
+IE_COMB1 [label="COMBINE", shape=house];
+}
+
+subgraph cluster_8 {
+color="#aaccf4";
+penwidth=2;
+F_MU1 [label="MU", shape=diamond];
+F_MU2 [label="MU", shape=diamond];
+F_MU3 [label="MU", shape=diamond];
+F_MU4 [label="MU", shape=diamond];
+F_MS1 [label="k", shape=triangle];
+F_MS2 [label="i", shape=triangle];
+F_MS3 [label="j", shape=triangle];
+}
+
+E_OC2 -> E_COMP1  [label="RHS"];
+E_OC3 -> E_COMP1  [label="LHS"];
+FB_ML1 -> FB_COMB1  [style=dotted];
+FB_ML1 -> FB_COMP1  [label="RHS"];
+FB_COMB1 -> FB_ETA2;
+FB_COMB1 -> FB_ETA1;
+FB_COMP1 -> FB_COMP2;
+FB_COMP1 -> FB_ETA1  [style=dotted];
+FB_COMP2 -> FB_ETA2  [style=dotted];
+IE36_CC1 -> IE36_COMP1  [label="RHS"];
+IE36_COMP2 -> IE36_COMP1  [label="LHS"];
+IE36_CC2 -> IE36_COMP2  [label="RHS"];
+IE36_CC3 -> IE36_ETA1;
+IT_ML1 -> IT_COMB1  [style=dotted];
+IT_ML1 -> IT_COMP1  [label="RHS"];
+IT_COMB1 -> IT_ETA1;
+IT_COMB1 -> IT_ETA2;
+IT_COMP1 -> IT_ETA1  [style=dotted];
+IT_COMP1 -> IT_COMP2;
+IT_COMP2 -> IT_ETA2  [style=dotted];
+IT12_CC1 -> IT12_COMP1  [label="RHS"];
+IT12_ML1 -> IT12_COMP2  [label="LHS"];
+IT12_ML1 -> IT12_COMB1  [style=dotted];
+IT12_ML2 -> IT12_COMB1  [style=dotted];
+IT12_ML2 -> IT12_COMP2  [label="RHS"];
+IT12_COMP2 -> IT12_COMP3  [label="RHS"];
+IT12_ML3 -> IT12_COMP3  [label="LHS"];
+IT12_ML3 -> IT12_COMB1  [style=dotted];
+IT12_COMP3 -> IT12_MS1;
+IT12_MS1 -> IT12_COMB1  [style=dotted];
+IE_CC1 -> IE_COMP1  [label="RHS"];
+IE_CC2 -> IE_COMP2  [label="RHS"];
+IE_ML1 -> IE_COMP3  [label="LHS"];
+IE_ML1 -> IE_COMB1  [style=dotted];
+IE_ML2 -> IE_COMP3  [label="RHS"];
+IE_ML2 -> IE_COMB1  [style=dotted];
+IE_COMP3 -> IE_MS1;
+IE_MS1 -> IE_COMB1  [style=dotted];
+F_MU1 -> F_MS1;
+F_MU2 -> F_MS2;
+F_MU4 -> F_MS3;
+F_MU3 -> F_MS1  [style=dotted];
+F_MU3 -> F_MS2  [style=dotted];
+F_MU3 -> F_MS3  [style=dotted];
+E_OC1 -> E_COMP1  [style=dotted];
+E_OC1 -> FB_ML1  [style=dotted];
+E_OC1 -> FB_COMP1  [style=dotted];
+E_OC1 -> FB_COMP2  [style=dotted];
+E_OC4 -> FB_COMP1  [label="LHS"];
+E_OC3 -> IE36_COMP2  [label="LHS"];
+FB_ETA2 -> IE36_COMP1  [style=dotted];
+FB_ETA2 -> IE36_COMP2  [style=dotted];
+FB_ETA2 -> IE36_ETA1  [style=dotted];
+E_COMP1 -> IT_COMP1  [label="LHS"];
+FB_ETA1 -> IT_ML1  [style=dotted];
+FB_ETA1 -> IT_COMP1  [style=dotted];
+FB_ETA1 -> IT_COMP2  [style=dotted];
+E_OC3 -> IT12_ETA1;
+E_OC3 -> IT12_ML1  [label="[1]"];
+E_OC3 -> IT12_ML3  [label="[0]"];
+E_OC3 -> IT12_MS1  [label="[0]"];
+E_OC4 -> IT12_ETA2;
+E_OC4 -> IT12_ML2  [label="[1]"];
+E_OC4 -> IT12_ML3  [label="[1]"];
+E_OC4 -> IT12_MS1  [label="[1]"];
+E_COMP1 -> IT12_COMP1  [label="LHS"];
+E_COMP1 -> IT12_ML1  [label="[0]"];
+E_COMP1 -> IT12_ML2  [label="[0]"];
+IT_ETA1 -> IT12_COMP1  [style=dotted];
+IT_ETA1 -> IT12_ETA1  [style=dotted];
+IT_ETA1 -> IT12_ML1  [style=dotted];
+IT_ETA1 -> IT12_ETA2  [style=dotted];
+IT_ETA1 -> IT12_ML2  [style=dotted];
+IT_ETA1 -> IT12_COMP2  [style=dotted];
+IT_ETA1 -> IT12_ML3  [style=dotted];
+IT_ETA1 -> IT12_COMP3  [style=dotted];
+IT_ETA1 -> IT12_MS1  [style=dotted];
+E_OC3 -> IE_ML2  [label="[0]"];
+E_OC3 -> IE_ETA1;
+E_OC3 -> IE_COMP1  [label="LHS"];
+E_OC3 -> IE_MS1  [label="[0]"];
+E_OC4 -> IE_ML2  [label="[1]"];
+E_OC4 -> IE_COMP2  [label="LHS"];
+E_OC4 -> IE_MS1  [label="[1]"];
+IT_ETA2 -> IE_ML1  [style=dotted];
+IT_ETA2 -> IE_ML2  [style=dotted];
+IT_ETA2 -> IE_ETA1  [style=dotted];
+IT_ETA2 -> IE_COMP1  [style=dotted];
+IT_ETA2 -> IE_COMP2  [style=dotted];
+IT_ETA2 -> IE_COMP3  [style=dotted];
+IT_ETA2 -> IE_MS1  [style=dotted];
+FB_ETA2 -> F_MU3  [style=dotted];
+IE36_COMP1 -> F_MU1;
+IE36_COMP2 -> F_MU2;
+IE36_ETA1 -> F_MU4;
+IT12_COMP1 -> F_MU1;
+IT12_ETA1 -> F_MU2;
+IT12_COMB1 -> F_MU3  [style=dotted];
+IT12_ETA2 -> F_MU4;
+IE_COMP1 -> F_MU1;
+IE_ETA1 -> F_MU2;
+IE_COMB1 -> F_MU3  [style=dotted];
+IE_COMP2 -> F_MU4;
+}
